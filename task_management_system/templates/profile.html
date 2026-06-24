@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Profile · TaskFlow{% endblock %}
+{% block page_title %}Profile{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+  <div class="profile-avatar" id="profileAvatar">–</div>
+  <div>
+    <h2 id="profileFullName" style="font-size:20px;">Loading…</h2>
+    <p style="color:var(--text-soft); font-size:13.5px;" id="profileUsername"></p>
+  </div>
+</div>
+
+<div class="profile-tabs">
+  <button class="profile-tab active" data-tab="info">Account Info</button>
+  <button class="profile-tab" data-tab="password">Change Password</button>
+  <button class="profile-tab" data-tab="activity">Activity Log</button>
+</div>
+
+<!-- Tab: account info -->
+<div class="tab-pane" id="tab-info">
+  <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom:22px;">
+    <div class="card stat-card stat-total">
+      <span class="stat-label">Tasks Owned</span>
+      <span class="stat-value" id="ownedTotal">–</span>
+    </div>
+    <div class="card stat-card stat-completed">
+      <span class="stat-label">Completed by You</span>
+      <span class="stat-value" id="ownedCompleted">–</span>
+    </div>
+  </div>
+
+  <div class="card section-card" style="max-width:520px;">
+    <form id="profileForm" novalidate>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" type="text" id="usernameField" disabled>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="full_name">Full name</label>
+        <input class="form-input" type="text" id="full_name" name="full_name">
+        <span class="form-error" id="err-full_name"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-input" type="email" id="email" name="email">
+        <span class="form-error" id="err-email"></span>
+      </div>
+      <button type="submit" class="btn btn-primary" id="profileSaveBtn">
+        <span id="profileSaveBtnText">Save Changes</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Tab: change password -->
+<div class="tab-pane" id="tab-password" style="display:none;">
+  <div class="card section-card" style="max-width:480px;">
+    <form id="passwordForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="current_password">Current password</label>
+        <input class="form-input" type="password" id="current_password" autocomplete="current-password">
+        <span class="form-error" id="err-current_password"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="new_password">New password</label>
+        <input class="form-input" type="password" id="new_password" autocomplete="new-password">
+        <span class="form-error" id="err-new_password"></span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="confirm_new_password">Confirm new password</label>
+        <input class="form-input" type="password" id="confirm_new_password" autocomplete="new-password">
+        <span class="form-error" id="err-confirm_new_password"></span>
+      </div>
+      <button type="submit" class="btn btn-primary" id="passwordSaveBtn">
+        <span id="passwordSaveBtnText">Update Password</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Tab: activity log -->
+<div class="tab-pane" id="tab-activity" style="display:none;">
+  <div class="card section-card">
+    <div id="activityList">
+      <div class="loading-row"><span class="spinner"></span> Loading activity…</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}

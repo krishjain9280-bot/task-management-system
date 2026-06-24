@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign up · TaskFlow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-card" style="max-width:460px;">
+    <div class="auth-brand">
+      <span class="brand-mark">TF</span>
+      <span class="brand-name">TaskFlow</span>
+    </div>
+    <h2 class="auth-title">Create your account</h2>
+    <p class="auth-sub">Start organizing tasks for you and your team.</p>
+
+    <form id="signupForm" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="full_name">Full name</label>
+        <input class="form-input" type="text" id="full_name" name="full_name" autocomplete="name" placeholder="Jane Doe">
+        <span class="form-error" id="err-full_name"></span>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-input" type="text" id="username" name="username" autocomplete="username" placeholder="jane.doe">
+          <span class="form-error" id="err-username"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="jane@company.com">
+          <span class="form-error" id="err-email"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-input" type="password" id="password" name="password" autocomplete="new-password" placeholder="At least 6 characters">
+          <span class="form-error" id="err-password"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirm_password">Confirm password</label>
+          <input class="form-input" type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" placeholder="Repeat password">
+          <span class="form-error" id="err-confirm_password"></span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit" id="signupSubmit">
+        <span id="signupSubmitText">Create account</span>
+      </button>
+    </form>
+
+    <p class="auth-footer">Already have an account? <a href="{{ url_for('pages.login_page') }}">Log in</a></p>
+  </div>
+</div>
+
+<div id="toastHost" class="toast-host" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

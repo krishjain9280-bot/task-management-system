@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · TaskFlow{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block topbar_actions %}
+<a href="{{ url_for('pages.task_create_page') }}" class="btn btn-primary">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+  New Task
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="stats-grid" id="statsGrid">
+  <div class="card stat-card stat-total">
+    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></span>
+    <span class="stat-label">Total Tasks</span>
+    <span class="stat-value" id="statTotal">–</span>
+  </div>
+  <div class="card stat-card stat-open">
+    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg></span>
+    <span class="stat-label">Open</span>
+    <span class="stat-value" id="statOpen">–</span>
+  </div>
+  <div class="card stat-card stat-progress">
+    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+    <span class="stat-label">In Progress</span>
+    <span class="stat-value" id="statProgress">–</span>
+  </div>
+  <div class="card stat-card stat-completed">
+    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+    <span class="stat-label">Completed</span>
+    <span class="stat-value" id="statCompleted">–</span>
+  </div>
+</div>
+
+<div class="card section-card">
+  <div class="section-head">
+    <h3>Recently created tasks</h3>
+    <a href="{{ url_for('pages.tasks_page') }}" class="btn btn-ghost btn-sm">View all →</a>
+  </div>
+  <div class="table-wrap">
+    <table class="task-table" id="recentTable">
+      <thead>
+        <tr><th>Task ID</th><th>Title</th><th>Owner</th><th>Status</th><th>Created</th></tr>
+      </thead>
+      <tbody id="recentTableBody">
+        <tr><td colspan="5"><div class="loading-row"><span class="spinner"></span> Loading recent tasks…</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

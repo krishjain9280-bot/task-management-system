@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Tasks · TaskFlow{% endblock %}
+{% block page_title %}Tasks{% endblock %}
+
+{% block topbar_actions %}
+<a href="{{ url_for('pages.task_create_page') }}" class="btn btn-primary">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+  New Task
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="card section-card">
+  <div class="table-toolbar">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input class="form-input" type="text" id="searchInput" placeholder="Search by title, ID, description or owner...">
+    </div>
+  </div>
+
+  <div class="filter-chips" id="statusFilters" style="margin-bottom:18px;">
+    <button class="chip active" data-status="">All</button>
+    <button class="chip" data-status="Open">Open</button>
+    <button class="chip" data-status="In Progress">In Progress</button>
+    <button class="chip" data-status="Completed">Completed</button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Task ID</th><th>Title</th><th>Owner</th><th>Status</th><th>Updated</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="tasksTableBody">
+        <tr><td colspan="6"><div class="loading-row"><span class="spinner"></span> Loading tasks…</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- Delete confirmation modal -->
+<div id="deleteModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); align-items:center; justify-content:center; z-index:200;">
+  <div class="card" style="max-width:380px; padding:24px; margin:16px;">
+    <h3 style="margin-bottom:10px;">Delete this task?</h3>
+    <p style="color:var(--text-soft); font-size:14px; margin-bottom:20px;">This action can't be undone. The task <strong id="deleteTaskLabel"></strong> will be permanently removed.</p>
+    <div style="display:flex; gap:10px; justify-content:flex-end;">
+      <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+      <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/tasks.js') }}"></script>
+{% endblock %}
