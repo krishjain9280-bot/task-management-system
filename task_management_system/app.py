@@ -22,6 +22,7 @@ from routes.profile_routes import profile_bp
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.config["SECRET_KEY"] = "my-super-secret-key-123"
 
     # Initialize DB (creates instance/taskmanager.db + tables if missing)
     database.init_app(app)

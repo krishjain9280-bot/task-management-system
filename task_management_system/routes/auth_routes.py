@@ -100,9 +100,9 @@ def login():
 
 @auth_bp.route("/logout", methods=["POST"])
 def logout():
-    user_id = session.get("user_id")
-    username = session.get("username")
-    if user_id:
-        log_activity(user_id, "LOGOUT", f"User '{username}' logged out.")
     session.clear()
-    return jsonify({"success": True, "message": "Logged out successfully."}), 200
+
+    return jsonify({
+        "success": True,
+        "message": "Logged out successfully."
+    }), 200
