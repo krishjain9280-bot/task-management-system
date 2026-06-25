@@ -89,13 +89,14 @@ def login():
 
     if not identifier or not password:
         return jsonify({"success": False, "message": "Missing credentials"}), 400
-
+    print("LOGIN ATTEMPT:", identifier)
     db = get_db()
 
     user = db.execute(
         "SELECT * FROM users WHERE username = ? OR email = ?",
         (identifier, identifier.lower())
     ).fetchone()
+    print("USER FOUND:", user)
 
     if not user or not check_password_hash(user["password_hash"], password):
         return jsonify({"success": False, "message": "Invalid login"}), 401
